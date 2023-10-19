@@ -1,5 +1,9 @@
 "use client"
+import { faClose } from "@fortawesome/free-solid-svg-icons";
+import { faHamburger } from "@fortawesome/free-solid-svg-icons/faHamburger";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { signOut, useSession } from "next-auth/react";
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
@@ -15,11 +19,15 @@ export default function NavbarComponent() {
         await signOut({ redirect: true, callbackUrl: "/" })
     }
 
+    const handleToggle = () => {
+        setToggle(!toggle)
+    }
+
     return (
         <div className="container mx-auto py-6 relative" >
             <div className="hidden sm:grid grid-cols-3 items-center">
                 <div className="">
-                    <img src="/images/logo.png" alt="" width={170} />
+                    <Image src="/images/logo.png" alt="" width={170} height={150} />
                 </div>
                 <div className="menu hidden justify-center sm:flex">
                     <ul className="flex flex-1 gap-14 justify-center items-center">
@@ -102,7 +110,9 @@ export default function NavbarComponent() {
                     <img src="/images/logo.png" alt="" width={150} />
                 </div>
                 <div className="toggle-button flex justify-end">
-                    Mobile
+                    <button onClick={handleToggle} >
+                        <FontAwesomeIcon icon={faHamburger} className="text-xl text-primary" />
+                    </button>
                 </div>
             </div>
 
@@ -110,49 +120,66 @@ export default function NavbarComponent() {
                 toggle && (
                     <>
                         <div className="menu sm:hidden absolute top-0 bg-primary w-full h-[100vh] z-50 text-white flex flex-col justify-around">
-                            <div className="title">
-                                <h1 className="text-3xl uppercase font-bold text-center mt-20" >
-                                    YÜKVERİLİR
-                                </h1>
+                            <button className="absolute top-10 right-10" onClick={handleToggle} >
+                                <FontAwesomeIcon icon={faClose} className="text-xl text-white" />
+                            </button>
+                            <div className="title text-center flex justify-center">
+                                <div  >
+                                <Image src="/images/logo2.png" alt="" width={150} height={100} />
+                                </div>
                             </div>
                             <div className="menu text-center">
                                 <ul className="flex flex-1 flex-col justify-center gap-5"  >
-                                    <li>
-                                        Anasayfa
+                                    <li onClick={handleToggle} >
+                                        <Link href="/" >
+                                            Anasayfa
+                                        </Link>
                                     </li>
-                                    <li>
-                                        Hedefimiz
+                                    <li onClick={handleToggle} >
+                                        <Link href="/about" >
+                                            Hedefimiz
+                                        </Link>
                                     </li>
-                                    <li>
-                                        İletişim
+                                    <li onClick={handleToggle} >
+                                        <Link href="/contact" >
+                                            İletişim
+                                        </Link>
                                     </li>
                                 </ul>
                             </div>
                             <div className="user-menu text-center">
                                 <ul className="flex flex-col gap-5" >
                                     {session ? (<>
-                                        <li>
-                                            Profilim
+                                        <li onClick={handleToggle} >
+                                            <Link href="/user" >
+                                                Profilim
+                                            </Link>
                                         </li>
-                                        <li>
-                                            İlanlarım
+                                        <li onClick={handleToggle} >
+                                            <Link href="/advert" >
+                                                İlanlarım
+                                            </Link>
                                         </li>
-                                        <li>
-                                            Araçlarım
+                                        <li onClick={handleToggle} >
+                                            <Link href="/vehicles" >
+                                                Araçlarım
+                                            </Link>
                                         </li>
-                                        <li>
+                                        <li onClick={handleToggle} >
                                             <button className="bg-secondary p-3 rounded-lg" onClick={handleSignOut} >
                                                 Çıkış Yap
                                             </button>
                                         </li>
                                     </>) : (<>
-                                        <li>
-                                            Kayıt Ol
+                                        <li onClick={handleToggle} >
+                                            <Link href='/register' >
+                                                Kayıt Ol
+                                            </Link>
                                         </li>
-                                        <li  >
-                                            <button className="bg-secondary p-3 rounded-lg" >
+                                        <li onClick={handleToggle} >
+                                            <Link href="/login" className="bg-secondary p-3 rounded-lg" >
                                                 Giriş Yap
-                                            </button>
+                                            </Link>
                                         </li>
                                     </>)}
                                 </ul>

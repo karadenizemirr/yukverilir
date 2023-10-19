@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 
 export default function AboutPage() {
@@ -14,7 +15,7 @@ export default function AboutPage() {
                     </h1>
                 </div>
                 <div className="img">
-                    <img src="/images/about.png" alt="" />
+                    <Image src="/images/about.png" alt="" className="w-full" width={500} height={500} quality={100} />
                 </div>
             </div>
         </div>

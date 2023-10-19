@@ -1,14 +1,21 @@
 "use client"
 import InputComponent from "@/components/form/input.component";
 import { Field, Form, Formik } from "formik";
+import { useSession } from "next-auth/react";
+import Image from "next/image";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import React from "react";
 
 export default function RegisterPage() {
+    const {data:session} = useSession()
+    if (session){
+        redirect('/')
+    } 
     return (
         <div className="grid grid-cols-2 w-full h-full" >
             <div className="register-img">
-                <img src="/images/register.jpg" alt="" />
+                <Image src="/images/register.jpg" alt="" className="w-full" width={200} height={200} />
             </div>
             <div className="register-form flex items-center">
                 <div className="form mx-auto w-2/3">

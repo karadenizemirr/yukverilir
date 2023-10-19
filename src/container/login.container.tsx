@@ -2,6 +2,7 @@
 import InputComponent from "@/components/form/input.component";
 import { Field, Form, Formik } from "formik";
 import { signIn } from "next-auth/react";
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import Swal from "sweetalert2";
@@ -10,7 +11,7 @@ export default function LoginContainer() {
     return (
         <div className="grid grid-cols-2 w-full h-full" >
             <div className="register-img">
-                <img src="/images/register.jpg" alt="" />
+                <Image src="/images/register.jpg" alt="" width={200} height={200} className="w-full" />
             </div>
             <div className="register-form flex items-center">
                 <div className="form mx-auto w-2/3">

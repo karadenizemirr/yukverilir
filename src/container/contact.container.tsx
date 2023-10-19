@@ -1,13 +1,14 @@
 "use client"
 import InputComponent from "@/components/form/input.component";
 import { Field, Form, Formik } from "formik";
+import Image from "next/image";
 import React from "react";
 
 export default function ContactContainer(){
     return (
         <div className="grid grid-cols-2 items-center" >
             <div className="img">
-                <img src="/images/contact.png" alt="" />
+                <Image src="/images/contact.png" alt="" className="w-full" width={200} height={200} />
             </div>
             <div className="form p-10">
                 <div className="title text-center mb-10">

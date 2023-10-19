@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { actions } from "@/redux/store/advert.state";
 import { store } from "@/redux";
 import { redirect } from "next/navigation";
+import Image from "next/image";
 
 export default function HeaderComponent() {
     const [country, setCountry] = React.useState<string>("");
@@ -33,7 +34,7 @@ export default function HeaderComponent() {
                     </h1>
                 </div>
                 <div className="img-card rounded-lg h-[65vh]">
-                    <img src="/images/banner.jpg" alt="" className="object-cover w-full h-full rounded-lg" />
+                    <Image src="/images/banner.jpg" alt="" className="object-cover w-full h-full rounded-lg" width={200} height={200} quality={90} />
                 </div>
 
                 <div className="search-card absolute bottom-0 sm:bottom-36 left-1/4 bg-silver p-4 rounded-lg shadow-xl w-1/2 ">
