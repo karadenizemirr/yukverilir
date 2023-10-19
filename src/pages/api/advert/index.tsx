@@ -1,7 +1,6 @@
-import { getCoordinates, getDistance } from "@/lib/google.maps"
+import { getCoordinates } from "@/lib/google.maps"
 import prisma from "@/lib/prisma"
 import { NextApiRequest, NextApiResponse } from "next"
-import { getServerSession } from "next-auth"
 
 export default async function(req:NextApiRequest, res:NextApiResponse){
     try{

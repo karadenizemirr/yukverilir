@@ -107,7 +107,7 @@ export default function NavbarComponent() {
 
             <div className="mobil-menu grid grid-cols-2 sm:hidden p-3 items-center relative">
                 <div className="logo">
-                    <img src="/images/logo.png" alt="" width={150} />
+                    <Image src="/images/logo.png" alt="" width={150} height={140} />
                 </div>
                 <div className="toggle-button flex justify-end">
                     <button onClick={handleToggle} >

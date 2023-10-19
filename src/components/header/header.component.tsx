@@ -14,23 +14,23 @@ import Image from "next/image";
 export default function HeaderComponent() {
     const [country, setCountry] = React.useState<string>("");
     const [district, setDistrict] = React.useState<string>("");
-    const [category,setCategory] = React.useState<string>("");
-    const [search,setSearch] = React.useState<boolean>(false);
+    const [category, setCategory] = React.useState<string>("");
+    const [search, setSearch] = React.useState<boolean>(false);
 
     useEffect(() => {
-        if (search){
+        if (search) {
             redirect('/search')
         }
     })
 
     const _category = ['Yük', 'Araç']
     return (
-        <div className="container mx-auto" >
+        <div className="container mx-auto " >
             <div className="mt-10 relative h-1/2">
                 <div className="bg-gradient-to-r from-transparent to-silver absolute top-0 w-full h-full rounded-lg"></div>
                 <div className="title absolute top-32 left-1/4 right-1/4">
-                    <h1 className="text-white text-4xl sm:text-6xl font-black text-center" >
-                        Binlerce <span className="text-secondary">Yük</span> ve <span className="text-primary">Araç</span> İlanları Arasında Arama Yapın
+                    <h1 className="text-white text-4xl sm:text-6xl font-black text-center animate__animated animate__bounce" >
+                        Binlerce <span className="text-secondary animate__animated animate__backInDown">Yük</span> ve <span className="text-primary animate__animated animate__backInDown">Araç</span> İlanları Arasında Arama Yapın
                     </h1>
                 </div>
                 <div className="img-card rounded-lg h-[65vh]">
@@ -50,12 +50,12 @@ export default function HeaderComponent() {
                                     'Content-Type': 'application/json',
                                 },
                                 body: JSON.stringify(value),
-                            }) 
+                            })
 
                             const data = await res.json();
                             store.dispatch(actions.setAdvert(data));
 
-                            if (data){
+                            if (data) {
                                 setSearch(true)
                             }
 

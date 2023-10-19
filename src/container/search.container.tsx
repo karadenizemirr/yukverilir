@@ -8,6 +8,7 @@ import React, { useEffect } from "react";
 import { format } from 'date-fns';
 import tr from 'date-fns/locale/tr';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function SearchContainer() {
     const data = store.getState()
@@ -21,7 +22,7 @@ export default function SearchContainer() {
                 <div className="topbar grid grid-cols-4">
                     <div className="content flex flex-1 justify-around">
                         <div className="title-col flex items-center gap-3">
-                            <img src="/images/icons/shipment.png" alt="" width={35} />
+                            <Image src="/images/icons/shipment.png" alt="" width={35} height={35} />
                             <h1 className="font-black uppercase" >
                                 {item.name}
                             </h1>

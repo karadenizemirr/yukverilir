@@ -2,6 +2,7 @@
 import InputComponent from "@/components/form/input.component";
 import { Field, Form, Formik } from "formik";
 import { signOut } from "next-auth/react";
+import Image from "next/image";
 import React from "react";
 import Swal from "sweetalert2";
 
@@ -43,7 +44,7 @@ export default function ProfileContainer({data}:{data:any}){
         <div className="container mx-auto flex justify-center" >
             <div className="profile-card border border-black rounded-lg shadow-lg p-5 w-1/2 flex flex-col gap-7">
                 <div className="pic">
-                    <img src="/images/logo.png" alt="" width={170} className="rounded-lg" />
+                    <Image src="/images/logo.png" alt="" width={170} className="rounded-lg" height={150} />
                 </div>
                 <div className="content">
                     <Formik initialValues={{
