@@ -1,0 +1,11 @@
+# Register Operations
+
+POST http://localhost:3000/api/user/register
+Content-Type: application/json
+
+{
+    "name": "Emirhan",
+    "surname": "Karadeniz",
+    "email": "karadenizemirr@gmail.com",
+    "phone": "5076510758"
+}

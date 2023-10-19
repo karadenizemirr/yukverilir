@@ -1,0 +1,99 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String     @id @default(uuid())
+  name      String
+  surname   String
+  phone     String @unique
+  email     String? @unique
+  role      String     @default("user")
+  isActive  Boolean    @default(true)
+  createdAt DateTime   @default(now())
+  twoFactor TwoFactor?
+  adverts   Advert[]
+  vehicles  Vehicles[]
+}
+
+model TwoFactor {
+  id     String  @id @default(uuid())
+  secret String
+  user   User?   @relation(fields: [userId], references: [id])
+  userId String? @unique
+}
+
+model Coordinates {
+  id    String  @id @default(uuid())
+  country String
+  district String
+  lat   String
+  lng   String
+  where Where[]
+  to    To[]
+}
+
+model Where {
+  id            String       @id @default(uuid())
+  coordinates   Coordinates? @relation(fields: [coordinatesId], references: [id])
+  coordinatesId String?
+
+  advert   Advert? @relation(fields: [advertId], references: [id])
+  advertId String?
+
+  vehicles   Vehicles? @relation(fields: [vehiclesId], references: [id])
+  vehiclesId String?
+}
+
+model To {
+  id            String       @id @default(uuid())
+  coordinates   Coordinates? @relation(fields: [coordinatesId], references: [id])
+  coordinatesId String?
+
+  advert   Advert? @relation(fields: [advertId], references: [id])
+  advertId String?
+
+  vehicles   Vehicles? @relation(fields: [vehiclesId], references: [id])
+  vehiclesId String?
+}
+
+model Advert {
+  id             String  @id @default(uuid())
+  name           String
+  type           String
+  amount         String
+  unit           String
+  price          String
+  vehicles_type  String
+  vehicles_case  String
+  payment_method String
+  delivired_type String
+  delivired_date String
+  where          Where[]
+  to             To[]
+
+  user  User? @relation(fields: [userId], references: [id])
+  userId String?
+}
+
+model Vehicles {
+  id             String  @id @default(uuid())
+  brand          String
+  model          String
+  vehicles_type  String
+  vehicles_case  String
+  delivired_date String
+  where          Where[]
+  to             To[]
+
+  user  User? @relation(fields: [userId], references: [id])
+  userId String?
+}
