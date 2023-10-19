@@ -5,6 +5,7 @@ import NavbarComponent from '@/components/navbar/navbar.component'
 import { getServerSession } from 'next-auth';
 import SessionProvider from '@/components/session/session.provider';
 import StoreProvider from '@/components/provider/provider.component';
+import FooterComponent from '@/components/footer/footer.component';
 
 export default async function RootLayout({
   children,
@@ -20,6 +21,7 @@ export default async function RootLayout({
           <SessionProvider session={session} >
             <NavbarComponent />
             {children}
+            <FooterComponent />
             </SessionProvider>
           </body>
         </StoreProvider>

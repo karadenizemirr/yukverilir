@@ -37,7 +37,7 @@ export default function VehiclesComponent() {
     return (
         <div>
             <div className="title">
-                <h1 className="text-4xl font-bold" >
+                <h1 className="text-4xl font-bold text-center" >
                     Araç İlanları Ekleyerek Herkesle Paylaşın
                 </h1>
             </div>

@@ -2,7 +2,7 @@ import React from "react";
 
 export default function ServicesComponent() {
     return (
-        <div className="container mx-auto mt-20 mb-20 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-10 justify-center">
+        <div className="container mx-auto mt-20 mb-20 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-10 justify-center">
             <div className="services-card text-center p-4 bg-light rounded-lg shadow-lg">
                 <div className="icon flex justify-center">
                     <img src="/images/icons/1.png" alt="" width={70} />

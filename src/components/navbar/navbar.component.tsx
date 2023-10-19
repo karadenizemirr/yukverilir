@@ -6,6 +6,7 @@ import React from "react";
 export default function NavbarComponent() {
     const { data: session } = useSession()
     const [dropdown, setDropdown] = React.useState(false)
+    const [toggle, setToggle] = React.useState(false)
 
     const handleDropdown = () => {
         setDropdown(!dropdown)
@@ -15,12 +16,12 @@ export default function NavbarComponent() {
     }
 
     return (
-        <div className="container mx-auto py-6" >
-            <div className="grid grid-cols-3 items-center">
+        <div className="container mx-auto py-6 relative" >
+            <div className="hidden sm:grid grid-cols-3 items-center">
                 <div className="">
                     <img src="/images/logo.png" alt="" width={170} />
                 </div>
-                <div className="menu flex justify-center">
+                <div className="menu hidden justify-center sm:flex">
                     <ul className="flex flex-1 gap-14 justify-center items-center">
                         <li>
                             <Link href="/" >
@@ -39,7 +40,7 @@ export default function NavbarComponent() {
                         </li>
                     </ul>
                 </div>
-                {session ? (<div className="button flex justify-end gap-10 items-center">
+                {session ? (<div className="button hidden sm:flex justify-end gap-10 items-center">
                     <div className="relative">
                         <button
                             onClick={handleDropdown}
@@ -95,6 +96,71 @@ export default function NavbarComponent() {
                     </div>
                 )}
             </div>
+
+            <div className="mobil-menu grid grid-cols-2 sm:hidden p-3 items-center relative">
+                <div className="logo">
+                    <img src="/images/logo.png" alt="" width={150} />
+                </div>
+                <div className="toggle-button flex justify-end">
+                    Mobile
+                </div>
+            </div>
+
+            {
+                toggle && (
+                    <>
+                        <div className="menu sm:hidden absolute top-0 bg-primary w-full h-[100vh] z-50 text-white flex flex-col justify-around">
+                            <div className="title">
+                                <h1 className="text-3xl uppercase font-bold text-center mt-20" >
+                                    YÜKVERİLİR
+                                </h1>
+                            </div>
+                            <div className="menu text-center">
+                                <ul className="flex flex-1 flex-col justify-center gap-5"  >
+                                    <li>
+                                        Anasayfa
+                                    </li>
+                                    <li>
+                                        Hedefimiz
+                                    </li>
+                                    <li>
+                                        İletişim
+                                    </li>
+                                </ul>
+                            </div>
+                            <div className="user-menu text-center">
+                                <ul className="flex flex-col gap-5" >
+                                    {session ? (<>
+                                        <li>
+                                            Profilim
+                                        </li>
+                                        <li>
+                                            İlanlarım
+                                        </li>
+                                        <li>
+                                            Araçlarım
+                                        </li>
+                                        <li>
+                                            <button className="bg-secondary p-3 rounded-lg" onClick={handleSignOut} >
+                                                Çıkış Yap
+                                            </button>
+                                        </li>
+                                    </>) : (<>
+                                        <li>
+                                            Kayıt Ol
+                                        </li>
+                                        <li  >
+                                            <button className="bg-secondary p-3 rounded-lg" >
+                                                Giriş Yap
+                                            </button>
+                                        </li>
+                                    </>)}
+                                </ul>
+                            </div>
+                        </div>
+                    </>
+                )
+            }
         </div>
     )
 }

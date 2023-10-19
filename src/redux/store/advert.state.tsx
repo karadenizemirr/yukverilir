@@ -9,8 +9,8 @@ export const {actions, reducer} = createSlice({
     name: 'advert',
     initialState,
     reducers: {
-         setAdvert: (state,action) => {
-            state.advert = action.payload;
+         setAdvert: (state:any,action:any) => {
+            state.advert = action.payload
          }
     },
 })

@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import '@fortawesome/fontawesome-svg-core/styles.css';
 
 
 @font-face {
@@ -24,4 +25,12 @@
 
 input::placeholder {
     color: black !important;
+}
+
+.blue-gradient {
+    background-image: linear-gradient(to right, #007bff00, #064bcb31);   
+}
+
+.orange-gradient {
+    background-image: linear-gradient(to right, #007bff00, #f3a8533e);   
 }
