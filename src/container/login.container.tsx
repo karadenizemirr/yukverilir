@@ -1,11 +1,16 @@
 "use client"
 import InputComponent from "@/components/form/input.component";
 import { Field, Form, Formik } from "formik";
+import { Metadata } from "next";
 import { signIn } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import Swal from "sweetalert2";
+
+export const metadata:Metadata = {
+    title: 'Giriş Yap',
+    description: 'yükverilir giriş yap'
+}
 
 export default function LoginContainer() {
     return (

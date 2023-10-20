@@ -17,8 +17,8 @@ export default function SearchContainer() {
     return (
         <div className="result-container grid grid-cols-2 gap-5 mt-10 " >
             {
-                vehicles?.map((item:any) => (
-                    <div className="result-card border shadow-sm rounded-lg p-4">
+                vehicles?.map((item:any,index:number) => (
+                    <div className="result-card border shadow-sm rounded-lg p-4" key={index}>
                 <div className="topbar grid grid-cols-4">
                     <div className="content flex flex-1 justify-around">
                         <div className="title-col flex items-center gap-3">

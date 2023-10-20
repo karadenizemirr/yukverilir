@@ -4,12 +4,14 @@ import InputComponent from "../form/input.component";
 import CountrySelectComponent from "../form/country.select.component";
 import DistrictSelectComponent from "../form/district.select";
 import SelectComponent from "../form/select.component";
-import { Field, Form, Formik } from "formik";
+import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useDispatch } from "react-redux";
 import { actions } from "@/redux/store/advert.state";
 import { store } from "@/redux";
 import { redirect } from "next/navigation";
 import Image from "next/image";
+import * as Yup from 'yup'
+import Swal from "sweetalert2";
 
 export default function HeaderComponent() {
     const [country, setCountry] = React.useState<string>("");
@@ -43,7 +45,15 @@ export default function HeaderComponent() {
                             country: "",
                             district: "",
                             category: ""
-                        }} onSubmit={async (value: any) => {
+                        }} 
+                        validationSchema={
+                            Yup.object({
+                                country: Yup.string().required('Ülke Seçimi Zorunludur'),
+                                district: Yup.string().required('Şehir Seçimi Zorunludur'),
+                                category: Yup.string().required('Kategori Seçimi Zorunludur')
+                            })
+                        }
+                        onSubmit={async (value: any) => {
                             const res = await fetch('/api/search', {
                                 method: 'POST',
                                 headers: {
@@ -74,6 +84,7 @@ export default function HeaderComponent() {
                                             />
                                         )}
                                     </Field>
+                                    <ErrorMessage name="country" />
                                 </div>
                                 <div className="row w-full">
                                     <Field name="district" >
@@ -89,6 +100,7 @@ export default function HeaderComponent() {
                                             />
                                         )}
                                     </Field>
+                                    <ErrorMessage name="district" />
                                 </div>
                                 <div className="row w-full">
                                     <Field name="category" >
@@ -104,6 +116,7 @@ export default function HeaderComponent() {
                                             />
                                         )}
                                     </Field>
+                                    <ErrorMessage name="category" />
                                 </div>
                                 <div className="row w-full flex justify-end">
                                     <button className="w-full p-2 rounded-lg px-5 bg-primary text-white hover:bg-secondary hover:text-white duration-150" type="submit">

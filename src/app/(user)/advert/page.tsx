@@ -3,7 +3,7 @@ import { authOption } from "@/pages/api/auth/[...nextauth]";
 import { getServerSession } from "next-auth";
 import React from "react";
 
-export const getData = async () => {
+async function getData(){
     const {user} = await getServerSession(authOption)
     const id = user?.id
 
@@ -14,9 +14,9 @@ export const getData = async () => {
         },
     })
 
-    return await res.json()
+    const data = await res.json()
 
-    
+    return data
 }
 
 export default async function UserAdvertPage() {
