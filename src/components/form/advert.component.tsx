@@ -8,9 +8,10 @@ import DatePicker from 'react-datepicker';
 import { registerLocale, setDefaultLocale } from 'react-datepicker';
 import tr from 'date-fns/locale/tr'; // Turkish locale from date-fns
 import 'react-datepicker/dist/react-datepicker.css';
-import { Field, Form, Formik } from "formik";
+import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useSession } from "next-auth/react";
-
+import Swal from "sweetalert2";
+import * as Yup from 'yup'
 
 export default function AdvertComponent() {
     const {data:session}:{data:any} = useSession()
@@ -64,9 +65,26 @@ export default function AdvertComponent() {
                         payment_method: formPaymentMethod,
                         delivired_type: formDeliviredType,
                         delivired_date: selectedDate
-                    }} onSubmit={async (values: any) => {
+                    }} 
+                    validationSchema={
+                        Yup.object({
+                            where_country: Yup.string().required('Zorunlu Alan'),
+                            where_district:Yup.string().required('Zorunlu Alan'),
+                            to_country:Yup.string().required('Zorunlu Alan'),
+                            to_district: Yup.string().required('Zorunlu Alan')
+                        })
+                    }
+                    onSubmit={async (values: any) => {
                         if (!session){
                             // State Kaydet ve Kullanıcı Girişi Yaptır
+                            Swal.fire({
+                                title: 'Hata',
+                                text: 'İlan paylaşabilmek için giriş yapmalısınız.',
+                                icon: 'error',
+                                timer: 3000,
+                                timerProgressBar: true,
+                                
+                            })
                         }else{
                             // İlanı Kaydet
                             values.id = id
@@ -76,7 +94,27 @@ export default function AdvertComponent() {
                                 headers: {
                                     'Content-Type': 'application/json'
                                 }
-                            }) 
+                            })
+
+                            const {ok} = await res.json()
+
+                            if (ok){
+                                Swal.fire({
+                                    title: 'İlan Ekle',
+                                    text: 'İlan Başarı ile Eklendş',
+                                    icon: 'success',
+                                    timer: 3000,
+                                    timerProgressBar: true
+                                })
+                            }else{
+                                Swal.fire({
+                                    title:'İlan Ekle',
+                                    text: 'İlan Eklenirken Sorun Meydana Geldi',
+                                    icon: 'error',
+                                    timer: 3000,
+                                    timerProgressBar: true
+                                })
+                            }
                         }
                     }} >
                     <Form className="flex flex-1 gap-7 flex-col mt-20" >
@@ -93,6 +131,7 @@ export default function AdvertComponent() {
                                     />
                                 )}
                             </Field>
+                            <ErrorMessage name="where_country" />
                             <Field name="where_district" >
                                 {({ field, form }: { field: any, form: any }) => (
                                     <DistrictSelectComponent
@@ -106,6 +145,7 @@ export default function AdvertComponent() {
                                     />
                                 )}
                             </Field>
+                            <ErrorMessage name="where_district" />
                         </div>
                         <div className="row flex gap-3">
                             <Field name="to_country" >
@@ -120,6 +160,7 @@ export default function AdvertComponent() {
                                     />
                                 )}
                             </Field>
+                            <ErrorMessage name="to_country" />
                             <Field name="to_district" >
                                 {({ field, form }: { field: any, form: any }) => (
                                     <DistrictSelectComponent
@@ -133,6 +174,7 @@ export default function AdvertComponent() {
                                     />
                                 )}
                             </Field>
+                            <ErrorMessage name="to_district" />
                         </div>
                         <div className="row flex gap-3">
                             <Field placeholder="Yük Adı" name="name" id="name" component={InputComponent} />
@@ -149,6 +191,7 @@ export default function AdvertComponent() {
                                     />
                                 )}
                             </Field>
+                            
                         </div>
                         <div className="row flex gap-3">
                             <Field placeholder="Miktar" name="amount" id="amount" component={InputComponent} />

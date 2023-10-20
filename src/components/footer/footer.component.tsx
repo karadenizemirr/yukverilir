@@ -11,7 +11,7 @@ export default function FooterComponent(){
                 </div>
                 <div className="bottom flex justify-center mt-10">
                     <p>
-                        TÜm Hakları Saklıdır. 2021
+                        TÜm Hakları Saklıdır. 2023
                     </p>
                 </div>
             </div>

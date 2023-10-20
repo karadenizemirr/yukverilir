@@ -33,7 +33,7 @@ export default function LoginContainer() {
 
                     }} >
                         <Form>
-                            <div className="row flex gap-6">
+                            <div className="row flex gap-5" style={{marginBottom: 10}}>
                                 <Field name="phone" id="phone" placeholder="Telefon Numarası" component={InputComponent} />
                             </div>
                             <div className="row flex flex-col gap-7 mt-8 text-center">

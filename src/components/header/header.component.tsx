@@ -48,8 +48,8 @@ export default function HeaderComponent() {
                         }} 
                         validationSchema={
                             Yup.object({
-                                country: Yup.string().required('Ülke Seçimi Zorunludur'),
-                                district: Yup.string().required('Şehir Seçimi Zorunludur'),
+                                country: Yup.string().required('İl Seçimi Zorunludur'),
+                                district: Yup.string().required('İlçe Seçimi Zorunludur'),
                                 category: Yup.string().required('Kategori Seçimi Zorunludur')
                             })
                         }
@@ -84,7 +84,18 @@ export default function HeaderComponent() {
                                             />
                                         )}
                                     </Field>
-                                    <ErrorMessage name="country" />
+                                    <ErrorMessage name="country">
+                                        {(msg) => {
+                                            Swal.fire({
+                                                title:'Hata',
+                                                text: msg,
+                                                icon: 'error',
+                                                timer: 2000,
+                                                timerProgressBar: true,
+                                            })
+                                            return null;
+                                        }}
+                                    </ErrorMessage>
                                 </div>
                                 <div className="row w-full">
                                     <Field name="district" >
@@ -100,7 +111,18 @@ export default function HeaderComponent() {
                                             />
                                         )}
                                     </Field>
-                                    <ErrorMessage name="district" />
+                                    <ErrorMessage name="district">
+                                    {(msg) => {
+                                            Swal.fire({
+                                                title:'Hata',
+                                                text: msg,
+                                                icon: 'error',
+                                                timer: 2000,
+                                                timerProgressBar: true,
+                                            })
+                                            return null;
+                                        }}
+                                    </ErrorMessage>
                                 </div>
                                 <div className="row w-full">
                                     <Field name="category" >
@@ -116,7 +138,18 @@ export default function HeaderComponent() {
                                             />
                                         )}
                                     </Field>
-                                    <ErrorMessage name="category" />
+                                    <ErrorMessage name="category">
+                                    {(msg) => {
+                                            Swal.fire({
+                                                title:'Hata',
+                                                text: msg,
+                                                icon: 'error',
+                                                timer: 2000,
+                                                timerProgressBar: true,
+                                            })
+                                            return null;
+                                        }}
+                                    </ErrorMessage>
                                 </div>
                                 <div className="row w-full flex justify-end">
                                     <button className="w-full p-2 rounded-lg px-5 bg-primary text-white hover:bg-secondary hover:text-white duration-150" type="submit">

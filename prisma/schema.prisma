@@ -79,6 +79,7 @@ model Advert {
   delivired_date String
   where          Where[]
   to             To[]
+  category String @default("advert")
 
   user  User? @relation(fields: [userId], references: [id])
   userId String?
@@ -93,6 +94,7 @@ model Vehicles {
   delivired_date String
   where          Where[]
   to             To[]
+  category String @default("vehicles")
 
   user  User? @relation(fields: [userId], references: [id])
   userId String?

@@ -40,7 +40,7 @@ export default async function POST(req:NextApiRequest, res:NextApiResponse){
                         coordinates: true
                     }
                 }
-            }
+            },
         })
         return res.status(200).send(advert);
     }

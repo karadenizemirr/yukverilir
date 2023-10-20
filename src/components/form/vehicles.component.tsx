@@ -56,6 +56,14 @@ export default function VehiclesComponent() {
                     }} onSubmit={async (values: any) => {
                         if (!session) {
                             // State Kaydet ve Kullanıcı Girişi Yaptır
+                            Swal.fire({
+                                title: 'Hata',
+                                text: 'Araç paylaşabilmek için giriş yapmalısınız.',
+                                icon: 'error',
+                                timer: 3000,
+                                timerProgressBar: true,
+                                
+                            })
                         } else {
                             // İlanı Kaydet
                             values.id = id

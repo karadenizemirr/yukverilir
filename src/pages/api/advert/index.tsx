@@ -8,7 +8,9 @@ export default async function(req:NextApiRequest, res:NextApiResponse){
             const data = req.body
             const where_address = data.where_country +','+ data.where_district + ',Türkiye'
             const to_address = data.to_country +','+ data.to_district + ',Türkiye'
-            const coordinates:any = await getCoordinates(where_address + ',' + to_address)
+            
+            const to_coordinates:any = await getCoordinates(to_address)
+            const where_coordinates:any = await getCoordinates(where_address)
 
             const save = await prisma.advert.create(
                 {
@@ -34,8 +36,8 @@ export default async function(req:NextApiRequest, res:NextApiResponse){
                                     create: {
                                         country: data.where_country,
                                         district: data.where_district,
-                                        lat: String(coordinates.lat),
-                                        lng: String(coordinates.lng)
+                                        lat: String(where_coordinates.lat),
+                                        lng: String(where_coordinates.lng)
                                     }
                                 }
                             }
@@ -46,8 +48,8 @@ export default async function(req:NextApiRequest, res:NextApiResponse){
                                     create: {
                                         country: data.to_country,
                                         district: data.to_district,
-                                        lat: String(coordinates.lat),
-                                        lng: String(coordinates.lng)
+                                        lat: String(to_coordinates.lat),
+                                        lng: String(to_coordinates.lng)
                                     }
                                 }
                             }

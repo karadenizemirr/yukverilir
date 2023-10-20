@@ -40,15 +40,15 @@ export default function RegisterPageContainer() {
                         })
                     }} >
                         <Form>
-                            <div className="row flex gap-6">
+                            <div className="row flex gap-3">
                                 <Field placeholder="Adınız" name="name" id="name" component={InputComponent} />
                                 <Field placeholder="Soyadınız" name="surname" id="surname" component={InputComponent} />
                             </div>
-                            <div className="row flex gap-6 mt-4">
+                            <div className="row flex gap-3 mt-4">
                                 <Field placeholder="Telefon Nu." name="phone" id="phone" component={InputComponent} />
                                 <Field placeholder="Mail Adresi" name="email" id="email" component={InputComponent} />
                             </div>
-                            <div className="row flex flex-col gap-7 mt-8 text-center">
+                            <div className="row flex flex-col gap-7 mt-8 text-center" style={{marginTop: 20}} > 
                                 <button className="bg-primary p-2 text-white rounded-lg" >
                                     Üye Ol
                                 </button>

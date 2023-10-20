@@ -9,10 +9,20 @@ import { format } from 'date-fns';
 import tr from 'date-fns/locale/tr';
 import Link from 'next/link';
 import Image from 'next/image';
+import { fetchDetail } from '@/redux/store/detail.state';
 
 export default function SearchContainer() {
     const data = store.getState()
     const vehicles:any = data.advertReducer.advert
+
+
+    const handleDetail = (id:any, category:any) => {
+        const data = {
+            id: id,
+            category: category
+        }
+        store.dispatch(fetchDetail(data))
+    }
     
     return (
         <div className="result-container grid grid-cols-2 gap-5 mt-10 " >
@@ -65,7 +75,7 @@ export default function SearchContainer() {
                 <div className="footer mt-4 border-t-2">
                     <ul className='flex gap-7 p-2 mx-auto' >
                         <li className='text-blue-500' >
-                            <Link href="/" >
+                            <Link href={`/search/${item?.id}`} onClick={() => handleDetail(item?.id, item?.category)} >
                             <FontAwesomeIcon icon={faInfoCircle} /> Detaylar
                             </Link>
                         </li>
