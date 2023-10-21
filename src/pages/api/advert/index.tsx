@@ -3,8 +3,6 @@ import prisma from "@/lib/prisma"
 import { NextApiRequest, NextApiResponse } from "next"
 
 export default async function(req:NextApiRequest, res:NextApiResponse){
-    console.log(req.body)
-
     try{
         if (req.method === 'POST'){
             const data = req.body

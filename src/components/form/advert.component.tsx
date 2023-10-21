@@ -17,6 +17,8 @@ export default function AdvertComponent() {
     const {data:session}:{data:any} = useSession()
     const id = session?.user?.id || '';
 
+    console.log(session)
+
     const [whereCountry, setWhereCountry] = useState<string>("")
     const [whereDistrict, setWhereDistrict] = React.useState<string>("")
     const [toCountry, setToCountry] = React.useState<string>("")

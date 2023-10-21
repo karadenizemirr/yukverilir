@@ -49,8 +49,6 @@ export const authOption = {
         },
         async jwt({token, user}:{token:any, user:any}){
             if(user){
-                
-                console.log('burada')
                 token.id = user.id
                 token.role = user.role
             }
