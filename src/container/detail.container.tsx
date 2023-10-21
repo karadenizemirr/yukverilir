@@ -8,6 +8,7 @@ import { Metadata } from "next";
 import React from "react";
 import { format } from 'date-fns';
 import tr from 'date-fns/locale/tr';
+import Link from "next/link";
 
 export const meta:Metadata = {
     title: 'Detay',
@@ -18,13 +19,13 @@ export default function DetailContainer() {
     console.log(detail)
     
     const destination = {
-        lat:parseFloat(detail.to[0].coordinates.lat),
-        lng:parseFloat(detail.to[0].coordinates.lng)
+        lat:parseFloat(detail?.to[0]?.coordinates.lat),
+        lng:parseFloat(detail?.to[0]?.coordinates.lng)
     }
 
     const origin = {
-        lat:parseFloat(detail.where[0].coordinates.lat),
-        lng:parseFloat(detail.where[0].coordinates.lng)
+        lat:parseFloat(detail?.where[0]?.coordinates.lat),
+        lng:parseFloat(detail?.where[0]?.coordinates.lng)
     }
 
     console.log(origin, destination)
@@ -37,7 +38,7 @@ export default function DetailContainer() {
             </div>
             <div className="topbar mb-7">
                 <ul className="flex flex-1 justify-between items-center" >
-                    <li>
+                    <li >
                         <FontAwesomeIcon icon={faCalendar} />İlan Tarihi: {detail?.created_at}
                     </li>
                     <li>
@@ -50,31 +51,31 @@ export default function DetailContainer() {
                         <FontAwesomeIcon icon={faBasketShopping} /> Fiyat: {detail?.price} TL
                     </li>
                     <li>
-                        <button className="bg-primary text-white p-2 rounded-lg" >
+                        <Link href={`tel:+90${detail?.user.phone}`} className="bg-primary text-white p-2 rounded-lg" >
                             <FontAwesomeIcon icon={faPhoneAlt} />&nbsp;Ara
-                        </button>
+                        </Link>
                     </li>
                 </ul>
             </div>
-            <div className="map-container w-full shadow-lg rounded-lg">
+            <div className="map-container w-full  rounded-lg">
                 <MapsComponent origin={origin} destination={destination} />
             </div>
             <div className="detail grid grid-cols-3 gap-5">
-                <div className="detail-card border p-4 shadow-lg ">
+                <div className="detail-card border p-4 ">
                     Ödeme Yöntemi: {detail?.payment_method}
                 </div>
-                <div className="detail-card border p-4 shadow-lg ">
+                <div className="detail-card border p-4 ">
                     Tip: {detail?.type}
                 </div>
-                <div className="detail-card border p-4 shadow-lg ">
+                <div className="detail-card border p-4 ">
                     Ağırlık: {detail?.amount}&nbsp;{detail?.unit}
                 </div>
             </div>
             <div className="detail grid grid-cols-2 gap-5 mt-10">
-                <div className="detail-card border p-4 shadow-lg ">
+                <div className="detail-card border p-4  ">
                     Araç Tipi: {detail?.vehicles_type}
                 </div>
-                <div className="detail-card border p-4 shadow-lg ">
+                <div className="detail-card border p-4 ">
                     Kasa Tipi: {detail?.vehicles_case}
                 </div>
             </div>
