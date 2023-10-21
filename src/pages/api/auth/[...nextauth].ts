@@ -11,7 +11,7 @@ export const authOption = {
             },
             async authorize(credentials, req) {
                 try {
-                    const res = await fetch('http://localhost:3000/api/user/login', {
+                    const res = await fetch('https://yukverilir-production.up.railway.app/api/user/login', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'

@@ -7,12 +7,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import React from "react";
+import Swal from "sweetalert2";
 
 export default function RegisterPageContainer() {
-    const {data:session} = useSession()
-    if (session){
+    const { data: session } = useSession()
+    if (session) {
         redirect('/')
-    } 
+    }
     return (
         <div className="grid grid-cols-2 w-full h-full" >
             <div className="register-img">
@@ -38,6 +39,22 @@ export default function RegisterPageContainer() {
                                 'Content-Type': 'application/json'
                             }
                         })
+
+                        const { ok } = await res.json()
+
+                        if (ok) {
+                            Swal.fire({
+                                title: 'Başarılı',
+                                text: 'Üye Olma İşleminiz Başarılı',
+                                icon: 'success'
+                            })
+                        } else {
+                            Swal.fire({
+                                title: 'Hata',
+                                text: 'Üye Olma İşleminiz Başarısız',
+                                icon: 'error'
+                            })
+                        }
                     }} >
                         <Form>
                             <div className="row flex gap-3">
@@ -48,7 +65,7 @@ export default function RegisterPageContainer() {
                                 <Field placeholder="Telefon Nu." name="phone" id="phone" component={InputComponent} />
                                 <Field placeholder="Mail Adresi" name="email" id="email" component={InputComponent} />
                             </div>
-                            <div className="row flex flex-col gap-7 mt-8 text-center" style={{marginTop: 20}} > 
+                            <div className="row flex flex-col gap-7 mt-8 text-center" style={{ marginTop: 20 }} >
                                 <button className="bg-primary p-2 text-white rounded-lg" >
                                     Üye Ol
                                 </button>
