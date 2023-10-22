@@ -27,8 +27,11 @@ export default function VehiclesComponent() {
     // Form State
     const [formVehiclesType, setFormVehiclesType] = React.useState<string>("")
     const [formVehiclesCase, setFormVehiclesCase] = React.useState<string>("")
+    const [formModel, setFormModel] = React.useState<string>("")
+    const [formBrand, setFormBrand] = React.useState<string>("")
 
-
+    const brand_type = ['Askam', 'BMC', 'Daewoo', 'DAF', 'Ford Trucks', 'Iveco', 'Mack', 'MAN', 'Mercedes-Benz', 'Renault', 'Secania', 'Volvo', 'Diğer']
+    const model = Array.from({ length: 2023 - 1985 + 1 }, (_, i) => 1985 + i);
     const vehicles_type = ['Tır', 'Kamyon', 'Pikap']
     const vehicles_case = ['Açık Kasa', 'Kapalı Kasa', 'Soğuk Hava', 'Sal Dorse', 'Tanker', 'Konteynır', 'Tentelli', 'Oto Taşıma', 'Damperli', 'Lowbed', 'Kuruyük',
         'Frigirofik', 'Tekstil', 'Slobas', 'Konteynır Taşıyıcı & Şasi Grubu'
@@ -150,8 +153,31 @@ export default function VehiclesComponent() {
                             </Field>
                         </div>
                         <div className="row flex gap-3">
-                            <Field placeholder="Aracın Markası" name="brand" id="brand" component={InputComponent} />
-                            <Field placeholder="Aracın Modeli" name="model" id="model" component={InputComponent} />
+                            <Field name="brand" >
+                                {({ field, form }: { field: any, form: any }) => (
+                                    <SelectComponent
+                                        {...field}
+                                        placeholder="Araç Markası"
+                                        array={brand_type}
+                                        onchange={(value: string) => {
+                                            form.setFieldValue('brand', value);
+                                        }}
+                                    />
+                                )}
+                            </Field>
+                            
+                            <Field name="model" >
+                                {({ field, form }: { field: any, form: any }) => (
+                                    <SelectComponent
+                                        {...field}
+                                        placeholder="Araç Modeli"
+                                        array={model}
+                                        onchange={(value: string) => {
+                                            form.setFieldValue('model', value);
+                                        }}
+                                    />
+                                )}
+                            </Field>
                         </div>
                         <div className="row flex gap-3">
                             <Field name="vehicles_case">
@@ -196,7 +222,7 @@ export default function VehiclesComponent() {
                                     timeFormat="HH:mm"
                                     timeIntervals={15}
                                     className="border-2 border-primary p-2 w-full rounded-lg"
-                                    placeholderText="Teslim Tarihi"
+                                    placeholderText="Araç Bekleme Tarihi"
                                     minDate={new Date()}
                                     name="delivired_date"
                                     id="delivired_date"

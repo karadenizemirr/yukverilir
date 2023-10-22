@@ -32,6 +32,7 @@ export default function AdvertComponent() {
     const [formVehiclesCase, setFormVehiclesCase] = React.useState<string>("")
     const [formPaymentMethod, setFormPaymentMethod] = React.useState<string>("")
     const [formDeliviredType, setFormDeliviredType] = React.useState<string>("")
+    const price_type = ['TL', 'USD', 'EUR']
     const type = ['Paket', 'Torba', 'Palet']
     const unit = ['Kg', 'Ton', 'Adet']
     const vehicles_type = ['Tır', 'Kamyon', 'Pikap']
@@ -211,19 +212,33 @@ export default function AdvertComponent() {
                         </div>
                         <div className="row flex gap-3">
                             <Field placeholder="Fiyat" name="price" id="price" component={InputComponent} />
-                            <Field name="vehicles_type" >
+                            <Field name="price_type" >
                                 {({ field, form }: { field: any, form: any }) => (
                                     <SelectComponent
                                         {...field}
-                                        placeholder="Araç Tipi"
-                                        array={vehicles_type}
+                                        placeholder="Fiyat Tipi"
+                                        array={price_type}
                                         onchange={(value: string) => {
-                                            form.setFieldValue('vehicles_type', value);
-                                            setFormVehiclesType(value);
+                                            form.setFieldValue('price_type', value);
                                         }}
                                     />
                                 )}
                             </Field>
+
+                            <Field name="payment_method" >
+                                {({ field, form }: { field: any, form: any }) => (
+                                    <SelectComponent
+                                        {...field}
+                                        placeholder="Ödeme Tipi"
+                                        array={payment_method}
+                                        onchange={(value: string) => {
+                                            form.setFieldValue('payment_method', value);
+                                            setFormPaymentMethod(value);
+                                        }}
+                                    />
+                                )}
+                            </Field>
+                            
                         </div>
                         <div className="row flex gap-3">
                             <Field name="vehicles_case">
@@ -239,19 +254,20 @@ export default function AdvertComponent() {
                                     />
                                 )}
                             </Field>
-                            <Field name="payment_method" >
+                            <Field name="vehicles_type" >
                                 {({ field, form }: { field: any, form: any }) => (
                                     <SelectComponent
                                         {...field}
-                                        placeholder="Ödeme Tipi"
-                                        array={payment_method}
+                                        placeholder="Araç Tipi"
+                                        array={vehicles_type}
                                         onchange={(value: string) => {
-                                            form.setFieldValue('payment_method', value);
-                                            setFormPaymentMethod(value);
+                                            form.setFieldValue('vehicles_type', value);
+                                            setFormVehiclesType(value);
                                         }}
                                     />
                                 )}
                             </Field>
+                            
                         </div>
                         <div className="gap-3">
                             <Field name="delivired_type" >
@@ -283,7 +299,7 @@ export default function AdvertComponent() {
                                     timeFormat="HH:mm"
                                     timeIntervals={15}
                                     className="border-2 border-primary p-2 w-full rounded-lg"
-                                    placeholderText="Teslim Tarihi"
+                                    placeholderText="İlan Bitiş Tarihi"
                                     minDate={new Date()}
                                     name="delivired_date"
                                     id="delivired_date"

@@ -6,7 +6,7 @@ export default function AboutContainer() {
         <div className="about">
             <div className="relative grid grid-cols-1 sm:grid-cols-2 items-center">
                 <div className="text px-24 text-center">
-                    <h1 className="text-7xl font-bold mb-10" >
+                    <h1 className="text-8xl font-bold mb-10" >
                         Hedefimiz
                     </h1>
                     <h1>

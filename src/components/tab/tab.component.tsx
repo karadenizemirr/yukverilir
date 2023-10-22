@@ -12,8 +12,8 @@ export default function TabComponent() {
                 <select id="tabs" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 "
                     onChange={(e:any) => setSelectedOption(e.target.value)}
                 >
-                    <option value="Advert">İlan Ekle</option>
-                    <option value="Vehicles" >Araç Ekle</option>
+                    <option value="Advert">Yük İlanı Ekle</option>
+                    <option value="Vehicles" >Boş Araç Ekle</option>
                 </select>
             </div>
             <ul className="mt-10 hidden text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg shadow sm:flex ">
@@ -23,14 +23,14 @@ export default function TabComponent() {
                         className="inline-block w-full p-4 text-white font-bold bg-primary rounded-l-lg focus:ring-4 focus:ring-blue-300 active focus:outline-none "
                         aria-current="page"
                         onClick={() => setSelectedOption("Advert")}
-                    >İlan Ekle</a>
+                    >Yük İlanı Ekle</a>
                 </li>
                 <li className="w-full">
                     <a
                         href="#"
                         className="inline-block w-full p-4 text-white font-bold bg-secondary hover:text-gray-700 hover:bg-orange-400 focus:ring-4 focus:ring-primary focus:outline-none "
                         onClick={() => setSelectedOption("Vehicles")}
-                    >Araç Ekle</a>
+                    >Boş Araç Ekle</a>
                 </li>
             </ul>
 
