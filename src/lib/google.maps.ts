@@ -1,4 +1,3 @@
-"use server"
 const API_KEY = process.env.NEXT_PUBLIC_GOOGLE_API_KEY;
 const BASE_URL = "https://maps.googleapis.com/maps/api";
 
@@ -16,21 +15,8 @@ export const getCoordinates = async (address: string) => {
 
 export const getDistance = async (where: string, from: string) => {
     try {
-        const apiKey = API_KEY as string;
-        const directionsURL = `https://maps.googleapis.com/maps/api/directions/json?origin=${encodeURIComponent(
-            from
-        )}&destination=${encodeURIComponent(where)}&key=${encodeURIComponent(apiKey)}`;
-
-        const response = await fetch(directionsURL);
-        const data = await response.json();
-
-        if (data.status === 'OK') {
-            const duration = data.routes[0].legs[0].duration.text;
-            console.log(duration)
-            return duration; 
-        } else {
-            return null;
-        }
+        const distance_url = `${BASE_URL}/distancematrix/json?destinations=${where}&origins=${from}&units=imperial&key=${API_KEY}`
+        return "Distance"
     } catch (err) {
         return null;
     }

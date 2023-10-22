@@ -28,9 +28,12 @@ export default function HeaderComponent() {
     const _category = ['Yük', 'Araç']
     return (
         <div className="container mx-auto " >
+            <h1 className="text-black text-4xl sm:text-6xl font-black text-center animate__animated animate__bounce sm:hidden" >
+                        Binlerce <span className="text-secondary animate__animated animate__backInDown">Yük</span> ve <span className="text-primary animate__animated animate__backInDown">Araç</span> İlanları Arasında Arama Yapın
+                    </h1>
             <div className="mt-10 relative h-1/2">
                 <div className="bg-gradient-to-r from-transparent to-silver absolute top-0 w-full h-full rounded-lg"></div>
-                <div className="title absolute top-32 left-1/4 right-1/4">
+                <div className="hidden sm:block md:block title absolute top-32 left-1/4 right-1/4">
                     <h1 className="text-white text-4xl sm:text-6xl font-black text-center animate__animated animate__bounce" >
                         Binlerce <span className="text-secondary animate__animated animate__backInDown">Yük</span> ve <span className="text-primary animate__animated animate__backInDown">Araç</span> İlanları Arasında Arama Yapın
                     </h1>

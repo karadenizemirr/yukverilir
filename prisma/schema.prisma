@@ -17,7 +17,7 @@ model User {
   phone     String @unique
   email     String? @unique
   role      String     @default("user")
-  isActive  Boolean    @default(true)
+  isActive  Boolean    @default(false)
   createdAt DateTime   @default(now())
   twoFactor TwoFactor?
   adverts   Advert[]

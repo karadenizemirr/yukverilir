@@ -1,5 +1,6 @@
 "use client"
 import InputComponent from "@/components/form/input.component";
+import { create_two_factor_code, twilio_sms } from "@/lib/sms";
 import { Field, Form, Formik } from "formik";
 import { Metadata } from "next";
 import { useSession } from "next-auth/react";
@@ -32,6 +33,7 @@ export default function RegisterPageContainer() {
                         phone: '',
                         email: ''
                     }} onSubmit={async (value: any) => {
+
                         const res = await fetch('/api/user/register', {
                             method: 'POST',
                             body: JSON.stringify(value),
@@ -40,14 +42,51 @@ export default function RegisterPageContainer() {
                             }
                         })
 
-                        const { ok } = await res.json()
+                        const { ok,id } = await res.json()
 
                         if (ok) {
-                            Swal.fire({
-                                title: 'Başarılı',
-                                text: 'Üye Olma İşleminiz Başarılı',
-                                icon: 'success'
+                            const verify = await Swal.fire({
+                                title:'Doğrulama',
+                                text: 'Telefon Numaranıza Gönderilen Kodu Giriniz',
+                                input: 'text',
+                                inputLabel: 'Doğrulama Kodu',
+                                inputPlaceholder: 'Doğrulama Kodu',
+                                timer: 1000 * 60 * 3,
+                                timerProgressBar: true,
+                                showCancelButton: true,
+                                cancelButtonText: 'İptal',
+                                confirmButtonText: 'Doğrula',
+                                showLoaderOnConfirm: true,
                             })
+
+                            if (verify.value && verify.isConfirmed){
+                                const verify_res = await fetch('/api/user/verify', {
+                                    method: 'POST',
+                                    body: JSON.stringify({
+                                        id,
+                                        code: verify.value
+                                    }),
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    }
+                                })
+
+                                const { ok } = await verify_res.json()
+
+                                if (ok){
+                                    Swal.fire({
+                                        title: 'Başarılı',
+                                        text: 'Üye Olma İşleminiz Başarılı',
+                                        icon: 'success'
+                                    })
+                                }else{
+                                    Swal.fire({
+                                        title: 'Hata',
+                                        text: 'Üye Olma İşleminiz Başarısız',
+                                        icon: 'error'
+                                    })
+                                }
+                            }
                         } else {
                             Swal.fire({
                                 title: 'Hata',
@@ -66,7 +105,7 @@ export default function RegisterPageContainer() {
                                 <Field placeholder="Mail Adresi" name="email" id="email" component={InputComponent} />
                             </div>
                             <div className="row flex flex-col gap-7 mt-8 text-center" style={{ marginTop: 20 }} >
-                                <button className="bg-primary p-2 text-white rounded-lg" >
+                                <button className="bg-primary p-2 text-white rounded-lg" type="submit">
                                     Üye Ol
                                 </button>
                                 <p>

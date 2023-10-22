@@ -61,6 +61,7 @@ export default function AdvertComponent() {
                         amount: formAmount,
                         unit: formUnit,
                         price: "",
+                        price_type: "",
                         vehicles_type: formVehiclesType,
                         vehicles_case: formVehiclesCase,
                         payment_method: formPaymentMethod,
@@ -76,6 +77,7 @@ export default function AdvertComponent() {
                         })
                     }
                     onSubmit={async (values: any) => {
+                        console.log(values)
                         if (!session){
                             // State Kaydet ve Kullanıcı Girişi Yaptır
                             Swal.fire({

@@ -30,6 +30,7 @@ export default async function(req:NextApiRequest, res:NextApiResponse){
                         payment_method: data.payment_method,
                         delivired_date: data.delivired_date,
                         delivired_type: data.delivired_type,
+                        price_type: data.price_type,
                         where:{
                             create: {
                                 coordinates:{

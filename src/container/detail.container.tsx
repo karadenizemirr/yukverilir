@@ -9,12 +9,22 @@ import React from "react";
 import { format } from 'date-fns';
 import tr from 'date-fns/locale/tr';
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 export const meta:Metadata = {
     title: 'Detay',
 }
 
-export default function DetailContainer() {
+export default function DetailContainer(){
+    try{
+        return Detail()
+    }catch(err){
+        redirect('/')
+    }
+}
+
+
+function Detail() {
     const detail: any = store.getState().detailReducer.detail
     console.log(detail)
     
@@ -37,18 +47,18 @@ export default function DetailContainer() {
                 </h1>
             </div>
             <div className="topbar mb-7">
-                <ul className="flex flex-1 justify-between items-center" >
+                <ul className="flex flex-1 justify-between items-center gap-10" >
                     <li >
-                        <FontAwesomeIcon icon={faCalendar} />İlan Tarihi: {detail?.created_at}
+                        <FontAwesomeIcon icon={faCalendar} />İlan Eklenme Tarihi: {format(new Date(detail?.created_at), 'dd/MM/yyyy', { locale: tr })}
                     </li>
                     <li>
-                        <FontAwesomeIcon icon={faCalendarAlt} />Bitiş Tarihi: {format(new Date(detail.delivired_date), 'dd/MM/yyyy', { locale: tr })}
+                        <FontAwesomeIcon icon={faCalendarAlt} />Bitiş Tarihi: {format(new Date(detail?.delivired_date), 'dd/MM/yyyy', { locale: tr })}
                     </li>
                     <li className="uppercase">
                         <FontAwesomeIcon icon={faPerson} /> <span className="uppercase" >{detail.user.name}&nbsp;{detail.user.surname}</span>
                     </li>
                     <li>
-                        <FontAwesomeIcon icon={faBasketShopping} /> Fiyat: {detail?.price} TL
+                        <FontAwesomeIcon icon={faBasketShopping} /> Fiyat: {detail?.price} {detail?.price_type}
                     </li>
                     <li>
                         <Link href={`tel:+90${detail?.user.phone}`} className="bg-primary text-white p-2 rounded-lg" >
