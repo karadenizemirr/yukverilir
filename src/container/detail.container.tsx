@@ -44,8 +44,8 @@ export default function DetailContainer() {
                     <li>
                         <FontAwesomeIcon icon={faCalendarAlt} />Bitiş Tarihi: {format(new Date(detail.delivired_date), 'dd/MM/yyyy', { locale: tr })}
                     </li>
-                    <li>
-                        <FontAwesomeIcon icon={faPerson} /> {detail.user.name}&nbsp;{detail.user.surname}
+                    <li className="uppercase">
+                        <FontAwesomeIcon icon={faPerson} /> <span className="uppercase" >{detail.user.name}&nbsp;{detail.user.surname}</span>
                     </li>
                     <li>
                         <FontAwesomeIcon icon={faBasketShopping} /> Fiyat: {detail?.price} TL
@@ -79,6 +79,19 @@ export default function DetailContainer() {
                     Kasa Tipi: {detail?.vehicles_case}
                 </div>
             </div>
+            {
+                detail.brand ? (<>
+                
+                <div className="detail grid grid-cols-2 gap-5 mt-10">
+                <div className="detail-card border p-4  ">
+                    Araç Markası: {detail?.brand}
+                </div>
+                <div className="detail-card border p-4 ">
+                    Araç Modeli: {detail?.model}
+                </div>
+            </div>
+                </>): (<></>)
+            }
         </div>
     )
 }

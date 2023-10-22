@@ -27,10 +27,9 @@ export default function LoginContainer() {
                     </div>
                     <Formik initialValues={{}} onSubmit={async (value: any) => {
                         const res = await signIn("credentials", {
-                            phone: value.phone
+                            phone: value.phone,
+                            redirect: true
                         })
-
-
                     }} >
                         <Form>
                             <div className="row flex gap-5" style={{marginBottom: 10}}>

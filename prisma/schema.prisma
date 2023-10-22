@@ -77,6 +77,7 @@ model Advert {
   payment_method String
   delivired_type String
   delivired_date String
+  created_at     DateTime @default(now())
   where          Where[]
   to             To[]
   category String @default("advert")
@@ -94,6 +95,7 @@ model Vehicles {
   delivired_date String
   where          Where[]
   to             To[]
+  created_at     DateTime @default(now())
   category String @default("vehicles")
 
   user  User? @relation(fields: [userId], references: [id])

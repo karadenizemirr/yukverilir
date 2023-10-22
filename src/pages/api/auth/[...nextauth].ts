@@ -1,6 +1,5 @@
 import CredentialsProvider from "next-auth/providers/credentials";
 import NextAuth from "next-auth/next"
-import prisma from "@/lib/prisma";
 
 export const authOption = {
     providers: [
@@ -11,7 +10,7 @@ export const authOption = {
             },
             async authorize(credentials, req) {
                 try {
-                    const res = await fetch('https://yukverilir-production.up.railway.app/api/user/login', {
+                    const res = await fetch(process.env.NEXT_PUBLIC_API + '/user/login', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
@@ -19,6 +18,7 @@ export const authOption = {
                         body: JSON.stringify(credentials)
                     });
                     const { ok, data } = await res.json()
+                    
                     if (ok) {
                         return data;
                     } else {
@@ -49,6 +49,7 @@ export const authOption = {
         },
         async jwt({token, user}:{token:any, user:any}){
             if(user){
+                console.log(user)
                 token.id = user.id
                 token.role = user.role
             }

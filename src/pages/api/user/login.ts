@@ -15,9 +15,10 @@ export default async function POST(req:NextApiRequest, res:NextApiResponse){
         )
 
         if (!user){
-            res.status(200).json({ok:false})
+            res.status(400).json({ok:false, data:null})
+        }else{
+            res.status(200).send({ok:true, data:user})
         }
-
-        res.status(200).json({ok:true, data:user})
+        
     }
 }
